@@ -17,6 +17,8 @@ import "./App.css";
 import AirDrop from "./components/AirDrop";
 import SolBalance from "./components/SolBalance";
 import SignTransaction from "./components/SignTransaction";
+import SendTokens from "./components/SendTokens";
+import GetTokens from "./components/GetTokens";
 
 function App() {
 	return (
@@ -33,6 +35,7 @@ function App() {
 						<AirDrop />
 						<SolBalance />
 						<SignTransaction/>
+						<SendTokens/>
 					</WalletModalProvider>
 				</WalletProvider>
 			</ConnectionProvider>
