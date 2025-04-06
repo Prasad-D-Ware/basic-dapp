@@ -9,38 +9,53 @@ import {
 import React, { useState } from "react";
 
 const SendTokens = () => {
-	const [to, setTo] = useState();
-	const [amount, setAmount] = useState();
+	const [to, setTo] = useState("");
+	const [amount, setAmount] = useState("");
 	const wallet = useWallet();
 	const { connection } = useConnection();
 
 	const sendTokens = async () => {
-		const transaction = new Transaction();
-		transaction.add(
-			SystemProgram.transfer({
-				fromPubkey: wallet.publicKey,
-				toPubkey: new PublicKey(to),
-				lamports: amount * LAMPORTS_PER_SOL,
-			})
-		);
+		try {
+			const transaction = new Transaction();
+			transaction.add(
+				SystemProgram.transfer({
+					fromPubkey: wallet.publicKey,
+					toPubkey: new PublicKey(to),
+					lamports: parseFloat(amount) * LAMPORTS_PER_SOL,
+				})
+			);
 
-		await wallet.sendTransaction(transaction, connection);
-		alert(`Send ${amount} SOL to ${to}`);
+			await wallet.sendTransaction(transaction, connection);
+			alert(`Successfully sent ${amount} SOL to ${to}`);
+			setTo("");
+			setAmount("");
+		} catch (error) {
+			alert(`Error: ${error.message}`);
+		}
 	};
 
 	return (
-		<div>
+		<div className="send-tokens-form">
 			<input
 				type="text"
-				placeholder="To"
+				placeholder="Recipient Address"
+				value={to}
 				onChange={(e) => setTo(e.target.value)}
 			/>
 			<input
-				type="text"
-				placeholder="Amount"
+				type="number"
+				placeholder="Amount in SOL"
+				value={amount}
 				onChange={(e) => setAmount(e.target.value)}
+				min="0"
+				step="0.1"
 			/>
-			<button onClick={sendTokens}>Send SOL</button>
+			<button 
+				onClick={sendTokens}
+				disabled={!wallet.connected || !to || !amount}
+			>
+				Send SOL
+			</button>
 		</div>
 	);
 };

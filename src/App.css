@@ -1,0 +1,210 @@
+/* Modern color scheme and global styles */
+:root {
+  --primary-color: #7743DB;
+  --secondary-color: #9364ED;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --placeholder-color: #6c757d;
+  --disabled-color: #e9ecef;
+  --success-color: #4caf50;
+  --error-color: #f44336;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-color);
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.wallet-buttons-container {
+  display: flex;
+  gap: 50rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+}
+
+.components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.component-card {
+  background: var(--card-background);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.component-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced Input Styles */
+input {
+  width: calc(100% - 2rem);
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+input::placeholder {
+  color: var(--placeholder-color);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(119, 67, 219, 0.15);
+}
+
+/* Enhanced Button Styles */
+button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(119, 67, 219, 0.2);
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(119, 67, 219, 0.25);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Wallet Balance Styles */
+.balance-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.balance-label {
+  font-size: 0.9rem;
+  color: var(--placeholder-color);
+}
+
+.balance-amount {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Form Layout Styles */
+.send-tokens-form,
+.sign-message-form,
+.airdrop-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Enhanced Wallet Adapter Button Overrides */
+.wallet-adapter-button {
+  background-color: var(--primary-color) !important;
+  padding: 0.875rem 1.5rem !important;
+  border-radius: 12px !important;
+  height: auto !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease !important;
+  min-width: 200px !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.wallet-adapter-button-trigger {
+  background-color: var(--primary-color) !important;
+}
+
+.wallet-adapter-button-disconnect {
+  background-color: var(--primary-color) !important;
+}
+
+.wallet-adapter-button:hover {
+  background-color: var(--secondary-color) !important;
+}
+
+/* Ensure the wallet dropdown maintains proper styling */
+.wallet-adapter-dropdown {
+  display: flex;
+}
+
+/* Component Headings */
+.component-card h2 {
+  margin: 0 0 1.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Loading state */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Success message */
+.success-message {
+  color: var(--success-color);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Error message */
+.error-message {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+  
+  .components-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  input, button {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}

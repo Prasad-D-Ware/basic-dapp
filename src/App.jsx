@@ -22,24 +22,44 @@ import GetTokens from "./components/GetTokens";
 
 function App() {
 	return (
-		<>
-			<ConnectionProvider
-				endpoint={
-					"https://solana-devnet.g.alchemy.com/v2/btdUtkWnLIFsX4vpHhtuq5tVzox7Vk9y"
-				}
-			>
-				<WalletProvider wallets={[]} autoConnect>
-					<WalletModalProvider>
-						<WalletMultiButton />
-						<WalletDisconnectButton />
-						<AirDrop />
-						<SolBalance />
-						<SignTransaction/>
-						<SendTokens/>
-					</WalletModalProvider>
-				</WalletProvider>
-			</ConnectionProvider>
-		</>
+		<ConnectionProvider
+			endpoint={
+				"https://solana-devnet.g.alchemy.com/v2/btdUtkWnLIFsX4vpHhtuq5tVzox7Vk9y"
+			}
+		>
+			<WalletProvider wallets={[]} autoConnect>
+				<WalletModalProvider>
+					<div className="app-container">
+						<div className="wallet-buttons-container">
+							<WalletMultiButton />
+							<WalletDisconnectButton />
+						</div>
+						<div className="components-grid">
+							<div className="component-card">
+								<h2>Wallet Balance</h2>
+								<SolBalance />
+							</div>
+							<div className="component-card">
+								<h2>Request Airdrop</h2>
+								<AirDrop />
+							</div>
+							<div className="component-card">
+								<h2>Sign Message</h2>
+								<SignTransaction />
+							</div>
+							<div className="component-card">
+								<h2>Send SOL</h2>
+								<SendTokens />
+							</div>
+							{/* <div className="component-card">
+								<h2>Get Tokens</h2>
+								<GetTokens />
+							</div> */}
+						</div>
+					</div>
+				</WalletModalProvider>
+			</WalletProvider>
+		</ConnectionProvider>
 	);
 }
 
